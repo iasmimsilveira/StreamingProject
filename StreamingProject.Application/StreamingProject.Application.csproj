@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Transaction\" />
-    <Folder Include="Streaming\" />
+    <ProjectReference Include="..\StreamingProject.Core\StreamingProject.Core.csproj" />
+    <ProjectReference Include="..\StreamingProject.Domain\StreamingProject.Domain.csproj" />
+    <ProjectReference Include="..\StreamingProject.Repository\StreamingProject.Repository.csproj" />
   </ItemGroup>
 
 </Project>

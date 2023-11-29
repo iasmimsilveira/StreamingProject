@@ -12,7 +12,7 @@ namespace StreamingProject.Domain.Account.Aggregates
     {
 
         private const int TRANSACTION_TIME_INTERVAL = -2;
-        private const int TRANSACTION_MERCHANT_REPEAT = 2;
+        private const int TRANSACTION_MERCHANT_REPEAT = 1;
 
 
         public Guid Id { get; set; }
@@ -33,7 +33,7 @@ namespace StreamingProject.Domain.Account.Aggregates
             //Verificar se o cartao está ativo
             this.IsCartaoAtivo(validationErrors);
 
-            Transaction.Aggregates.Transacao transacao = new Transaction.Aggregates.Transacao();
+            Transacao transacao = new Transaction.Aggregates.Transacao();
             transacao.Merchant = new Transaction.ValueObject.Merchant() { Nome = merchant };
             transacao.Valor = valor;
             transacao.Descricao = descricao;

@@ -1,4 +1,9 @@
-﻿using StreamingProject.Application.Account.DTO;
+﻿using StreamingProject.Repository.Streaming;
+using StreamingProject.Application.Account.Dto;
+using StreamingProject.Core.Exception;
+using StreamingProject.Domain.Account.Aggregates;
+using StreamingProject.Domain.Streaming.Aggregates;
+using StreamingProject.Repository.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,23 +14,64 @@ namespace StreamingProject.Application.Account
 {
     public class UsuarioService
     {
-        public CriarUsuarioDTO CriarUsuario (CriarUsuarioDTO dto)
+        private PlanoRepository planoRepository = new PlanoRepository();
+        private UsuarioRepository usuarioRepository = new UsuarioRepository();
+
+
+        public UsuarioDto CriarConta(UsuarioDto conta)
         {
-            //Todo pegar cartao do banco
-            //Cartao cartao = pegar cartao pelo usuario
+            //Todo: Verificar pegar plano
+            Plano plano = this.planoRepository.ObterPlanoPorId(conta.PlanoId);
 
-            //Todo pegar plano por id:
-            //Plano plano = //ir ao banco e pegar por id
-
-            //Usuario usuario = new Usuario();
-            //usuario.Criar(dto.Nome, dto.CPF, Plano, Cartao);
-
-            //Gravar Usuario do banco de dados
-
-            return new CriarUsuarioDTO
+            if (plano == null)
             {
+                new BusinessException(new BusinessValidation()
+                {
+                    ErrorMessage = "Plano não encontrado",
+                    ErrorName = nameof(CriarConta)
+                }).ValidateAndThrow();
+            }
 
-            };
+
+            Cartao cartao = new Cartao();
+            cartao.Ativo = conta.Cartao.Ativo;
+            cartao.Numero = conta.Cartao.Numero;
+            cartao.Limite = conta.Cartao.Limite;
+
+            //Criar Usuario
+            Usuario usuario = new Usuario();
+            usuario.Criar(conta.Nome, conta.CPF, plano, cartao);
+
+            //Gravar o usuario na base;
+            this.usuarioRepository.SalvarUsuario(usuario);
+            conta.Id = usuario.Id;
+
+            // Retornar Conta Criada
+            return conta;
         }
+
+        public UsuarioDto ObterUsuario(Guid id)
+        {
+            var usuario = this.usuarioRepository.ObterUsuario(id);
+
+            if (usuario == null)
+                return null;
+
+            UsuarioDto result = new UsuarioDto()
+            {
+                Id = usuario.Id,
+                Cartao = new CartaoDto()
+                {
+                    Ativo = usuario.Cartoes.FirstOrDefault().Ativo,
+                    Limite = usuario.Cartoes.FirstOrDefault().Limite,
+                    Numero = "xxxx-xxxx-xxxx-xx"
+                },
+                CPF = usuario.CPF.NumeroFormatado(),
+                Nome = usuario.Nome,
+            };
+
+            return result;
+        }
+
     }
 }

@@ -1,5 +1,4 @@
-﻿using StreamingProject.Domain.Account.Aggregates;
-using StreamingProject.Domain.Account.ValueObject;
+﻿using StreamingProject.Domain.Account.ValueObject;
 using StreamingProject.Domain.Streaming.Aggregates;
 using System;
 using System.Collections.Generic;

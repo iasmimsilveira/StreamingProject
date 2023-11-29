@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace StreamingProject.Tests.Domain.Account
 {
+
     public class UsuarioTest
     {
         [Fact]
@@ -113,5 +114,4 @@ namespace StreamingProject.Tests.Domain.Account
 
     }
 }
-
 
