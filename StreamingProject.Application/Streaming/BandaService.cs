@@ -101,6 +101,13 @@ namespace StreamingProject.Application.Streaming
             return dto;
 
         }
+
+        public Musica ObterMusica(Guid idMusica)
+        {
+            return this.Repository.ObterMusica(idMusica);
+        }
     }
+}
+
 }
 

@@ -21,5 +21,16 @@ namespace StreamingProject.Repository.Streaming
         {
             return Bandas.FirstOrDefault(x => x.Id == id);
         }
+
+        public Musica ObterMusica(Guid idMusica)
+        {
+            foreach (var album in Banda.Albums)
+            {
+                result = album.Musicas.FirstOrDefault(x => x.Id == idMusica);
+
+                if  (result)
+
+            }
+        }
     }
 }

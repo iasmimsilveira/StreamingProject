@@ -36,5 +36,12 @@ namespace StreamingProject.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("{id}/favoritar")]
+        public IActionResult FavoritarMusica(Guid id, FavoritarDto dto)
+        {
+            this._service.FavoritarMusica(id, dto.IdMusica);
+            return Ok();
+        }
     }
 }
