@@ -1,6 +1,5 @@
 ﻿using StreamingProject.Domain.Account.Aggregates;
 using StreamingProject.Domain.Streaming.Aggregates;
-using StreamingProject.Domain.Streaming.ValueObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;

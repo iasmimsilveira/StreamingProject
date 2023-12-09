@@ -21,6 +21,8 @@ namespace StreamingProject.Application.Account.Dto
         public Guid PlanoId { get; set; }
 
         public CartaoDto Cartao { get; set; }
+
+        public List<PlaylistDto> Playlists { get; set; }
     }
 
     public class CartaoDto
@@ -34,4 +36,24 @@ namespace StreamingProject.Application.Account.Dto
         [Required]
         public Boolean Ativo { get; set; }
     }
+
+    public class PlaylistDto
+    {
+        public Guid Id { get; set; }
+        public string Nome { get; set; }
+        public Boolean Publica { get; set; }
+        public List<MusicaDto> Musicas { get; set; }
+
+    }
+
+    public class MusicaDto
+    {
+        public Guid Id { get; set; }
+        public string Nome { get; set; }
+        public int Duracao { get; set; }
+
+    }
 }
+
+
+

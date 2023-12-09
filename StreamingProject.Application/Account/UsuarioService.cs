@@ -1,5 +1,4 @@
-﻿using StreamingProject.Repository.Streaming;
-using StreamingProject.Application.Account.Dto;
+﻿using StreamingProject.Application.Account.Dto;
 using StreamingProject.Core.Exception;
 using StreamingProject.Domain.Account.Aggregates;
 using StreamingProject.Domain.Streaming.Aggregates;
@@ -9,20 +8,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StreamingProject.Application.Streaming;
+using StreamingProject.Repository;
 
 namespace StreamingProject.Application.Account
 {
     public class UsuarioService
     {
-        private PlanoRepository planoRepository = new PlanoRepository();
         private UsuarioRepository usuarioRepository = new UsuarioRepository();
-        private BandaService bandaService = new BandaService();
+        private PlanoRepository planoRepository = new PlanoRepository();
+        private BandaRepository bandaRepository = new BandaRepository();
 
-        public UsuarioDto CriarConta(UsuarioDto conta)
+
+        public async Task<UsuarioDto> CriarConta(UsuarioDto conta)
         {
             //Todo: Verificar pegar plano
-            Plano plano = this.planoRepository.ObterPlanoPorId(conta.PlanoId);
+            Plano plano = await this.planoRepository.ObterPlano(conta.PlanoId);
 
             if (plano == null)
             {
@@ -79,14 +79,14 @@ namespace StreamingProject.Application.Account
                     Id = item.Id,
                     Nome = item.Nome,
                     Publica = item.Publica,
-                    Musicas = new List<Streaming.Dto.MusicaDto>()
+                    Musicas = new List<Account.Dto.MusicaDto>()
                 };
 
                 foreach (var musicas in item.Musicas)
                 {
-                    playList.Musicas.Add(new Streaming.Dto.MusicaDto()
+                    playList.Musicas.Add(new Account.Dto.MusicaDto()
                     {
-                        Duracao = musicas.Duracao.Valor,
+                        Duracao = musicas.Duracao,
                         Id = musicas.Id,
                         Nome = musicas.Nome
                     });
@@ -98,7 +98,7 @@ namespace StreamingProject.Application.Account
             return result;
         }
 
-        public void FavoritarMusica(Guid id, Guid idMusica)
+        public async Task FavoritarMusica(Guid id, Guid idMusica)
         {
             var usuario = this.usuarioRepository.ObterUsuario(id);
 
@@ -111,7 +111,7 @@ namespace StreamingProject.Application.Account
                 });
             }
 
-            var musica = this.bandaService.ObterMusica(idMusica);
+            var musica = await this.bandaRepository.ObterMusica(idMusica);
 
             if (musica == null)
             {
@@ -128,5 +128,4 @@ namespace StreamingProject.Application.Account
         }
     }
 }
-
 

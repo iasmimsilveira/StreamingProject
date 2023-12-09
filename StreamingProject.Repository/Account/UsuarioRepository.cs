@@ -24,7 +24,12 @@ namespace StreamingProject.Repository.Account
             usuario.Id = Guid.NewGuid();
             UsuarioRepository.usuarios.Add(usuario);
         }
+
+        public void Update(Usuario usuario) 
+        {
+            Usuario usuarioOld = this.ObterUsuario(usuario.Id);
+            UsuarioRepository.usuarios.Remove(usuarioOld);
+            UsuarioRepository.usuarios.Add(usuario);
+        }
     }
-
-
 }

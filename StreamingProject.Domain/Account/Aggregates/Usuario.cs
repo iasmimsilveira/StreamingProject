@@ -15,14 +15,12 @@ namespace StreamingProject.Domain.Account.Aggregates
         public CPF CPF { get; set; }
         public List<Cartao> Cartoes { get; set; }
         public List<Playlist> Playlists { get; set; }
-        public List<Banda> BandasFavoritas { get; set; }
         public List<Assinatura> Assinaturas { get; set; }
 
 
         public Usuario()
         {
             this.Playlists = new List<Playlist>();
-            this.BandasFavoritas = new List<Banda>();
             this.Assinaturas = new List<Assinatura>();
             this.Cartoes = new List<Cartao>();
         }
@@ -82,6 +80,11 @@ namespace StreamingProject.Domain.Account.Aggregates
             });
         }
 
-
+        public void Favoritar(Musica musica)
+        {
+            this.Playlists.FirstOrDefault(x => x.Nome == "Favoritas")
+                          .Musicas.Add(musica);
+        }
     }
 }
+

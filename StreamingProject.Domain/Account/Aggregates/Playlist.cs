@@ -12,7 +12,7 @@ namespace StreamingProject.Domain.Streaming.Aggregates
 
         public Playlist()
         {
-            this.Musicas = new List<Musica>();
+            Musicas = new List<Musica>();
         }
     }
 }

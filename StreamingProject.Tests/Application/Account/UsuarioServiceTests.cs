@@ -35,7 +35,7 @@ namespace StreamingProject.Tests.Application.Account
         }
 
         [Fact]
-        public void NaoDeveCriarContaComPlanoInvalido()
+        public async Task NaoDeveCriarContaComPlanoInvalido()
         {
             //Arrange
             UsuarioDto dto = new UsuarioDto()
@@ -53,7 +53,7 @@ namespace StreamingProject.Tests.Application.Account
 
             UsuarioService service = new UsuarioService();
 
-            Assert.Throws<BusinessException>(() => service.CriarConta(dto));
+            await Assert.ThrowsAsync<BusinessException>(() => service.CriarConta(dto));
         }
     }
 }
