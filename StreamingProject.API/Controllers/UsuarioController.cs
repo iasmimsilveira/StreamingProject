@@ -42,8 +42,23 @@ namespace StreamingProject.API.Controllers
         [HttpPost("{id}/favoritar")]
         public async Task<IActionResult> FavoritarMusica(Guid id, FavoritarDto dto)
         {
-            await this._service.FavoritarMusica(id, dto.IdMusica);
-            return Ok();
+            //await this._service.FavoritarMusica(id, dto.IdMusica);
+            // return Ok();
+            try
+            {
+                _logger.LogInformation($"Iniciando FavoritarMusica para o usuário com ID: {id} e ID da música: {dto.IdMusica}");
+
+                await this._service.FavoritarMusica(id, dto.IdMusica);
+
+                _logger.LogInformation("FavoritarMusica concluído com sucesso.");
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erro ao executar FavoritarMusica: {ex.Message}");
+                return StatusCode(500, "Erro interno do servidor");
+            }
         }
     }
 }

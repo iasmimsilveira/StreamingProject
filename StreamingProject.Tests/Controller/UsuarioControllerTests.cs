@@ -13,7 +13,7 @@ namespace StreamingProject.Tests.Controller
     public class UsuarioControllerTests
     {
         [Fact]
-        public void DeveChamarPostCriarUsuaarioComSucesso()
+        public async Task DeveChamarPostCriarUsuaarioComSucesso()
         {
             UsuarioDto dto = new UsuarioDto()
             {
@@ -33,7 +33,7 @@ namespace StreamingProject.Tests.Controller
 
             var controller = new UsuarioController(logger);
 
-            var response = controller.CriarConta(dto);
+            var response = await controller.CriarConta(dto);
 
             Assert.True(response is CreatedResult);
 

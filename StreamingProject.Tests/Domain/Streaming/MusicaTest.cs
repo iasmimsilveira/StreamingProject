@@ -1,4 +1,5 @@
-﻿using StreamingProject.Domain.Account.Aggregates;
+﻿using StreamingProject.Application.Account;
+using StreamingProject.Domain.Account.Aggregates;
 using StreamingProject.Domain.Streaming.Aggregates;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,5 @@ namespace StreamingProject.Tests.Domain.Streaming
         { 
 
         }
-
     }
 }

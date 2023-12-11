@@ -20,7 +20,7 @@ namespace StreamingProject.Repository
 
         public async Task<Musica> ObterMusica(Guid id)
         {
-            var result = await this.HttpClient.GetAsync($"https://localhost:7192/api/banda/musica/{id}");
+            var result = await this.HttpClient.GetAsync($"https://localhost:7065/api/banda/musica/{id}");
 
             if (result.IsSuccessStatusCode == false)
                 return null;
