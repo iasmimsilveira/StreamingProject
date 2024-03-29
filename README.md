@@ -2,7 +2,7 @@
 
 Bem-vindo ao meu projeto de streaming de música! Este projeto foi desenvolvido como parte do meu aprendizado e exploração no universo do desenvolvimento de software.
 
-## Visão Geral
+## Visão Geral do projeto
 
 O objetivo deste projeto é criar uma plataforma de streaming de música que ofereça uma experiência personalizada e envolvente aos usuários. Ao longo do desenvolvimento, concentrei-me em cinco principais funcionalidades:
 
